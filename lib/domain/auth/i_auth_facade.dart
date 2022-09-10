@@ -8,5 +8,5 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> signInWithEmailPassword(
       {required EmailAddress email, required Password password});
   Future<Either<AuthFailure, Unit>> signInWithGoogle();
-  Future<Either<AuthFailure, String>> returnAValueString();
+  // Future<Either<AuthFailure, String>> returnAValueString();
 }
