@@ -1,11 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_ddd_learn/domain/core/errors.dart';
 import 'package:flutter_ddd_learn/domain/core/failures.dart';
 
 @immutable
 abstract class ValueObject<T> {
   const ValueObject();
   Either<ValueFailure<T>, T> get value;
+
+  T getOrCrash() {
+    return value.fold((l) => throw UnexpectedValueError(l), id);
+  }
+
+  bool isValid() => value.isRight();
 
   @override
   bool operator ==(Object other) {
