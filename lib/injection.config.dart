@@ -6,16 +6,19 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:firebase_auth/firebase_auth.dart' as _i3;
+import 'package:flutter/material.dart' as _i8;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/cubit/auth_cubit.dart' as _i8;
-import 'application/auth/signIn_form/sign_in_form_bloc.dart' as _i7;
+import 'application/auth/authentication/authentication_bloc.dart' as _i11;
+import 'application/auth/login/auth_cubit.dart' as _i10;
+import 'application/auth/signIn_form/sign_in_form_bloc.dart' as _i9;
 import 'domain/domain.dart' as _i5;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i6;
-import 'infrastructure/core/firebase_injectable_module.dart'
-    as _i9; // ignore_for_file: unnecessary_lambdas
+import 'infrastructure/core/firebase_injectable_module.dart' as _i12;
+import 'presentation/core/app.dart'
+    as _i7; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -29,9 +32,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => firebaseInjectableModule.googleSignIn);
   gh.lazySingleton<_i5.IAuthFacade>(() =>
       _i6.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i4.GoogleSignIn>()));
-  gh.factory<_i7.SignInFormBloc>(() => _i7.SignInFormBloc());
-  gh.factory<_i8.AuthCubit>(() => _i8.AuthCubit(get<_i5.IAuthFacade>()));
+  gh.factory<_i7.MyApp>(() => _i7.MyApp(key: get<_i8.Key>()));
+  gh.factory<_i9.SignInFormBloc>(() => _i9.SignInFormBloc());
+  gh.factory<_i10.AuthCubit>(() => _i10.AuthCubit(get<_i5.IAuthFacade>()));
+  gh.factory<_i11.AuthenticationBloc>(
+      () => _i11.AuthenticationBloc(get<_i5.IAuthFacade>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i9.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i12.FirebaseInjectableModule {}

@@ -18,9 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
-        $default, {
+    TResult Function(FormzStatus status) $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -28,9 +26,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -38,9 +34,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -94,7 +88,7 @@ abstract class _$$_AuthStateCopyWith<$Res> {
   factory _$$_AuthStateCopyWith(
           _$_AuthState value, $Res Function(_$_AuthState) then) =
       __$$_AuthStateCopyWithImpl<$Res>;
-  $Res call({Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+  $Res call({FormzStatus status});
 }
 
 /// @nodoc
@@ -109,13 +103,13 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? authFailureOrSuccessOption = freezed,
+    Object? status = freezed,
   }) {
     return _then(_$_AuthState(
-      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
-          ? _value.authFailureOrSuccessOption
-          : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as FormzStatus,
     ));
   }
 }
@@ -123,14 +117,14 @@ class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthState implements _AuthState {
-  const _$_AuthState({required this.authFailureOrSuccessOption});
+  const _$_AuthState({required this.status});
 
   @override
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final FormzStatus status;
 
   @override
   String toString() {
-    return 'AuthState(authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'AuthState(status: $status)';
   }
 
   @override
@@ -138,13 +132,12 @@ class _$_AuthState implements _AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthState &&
-            const DeepCollectionEquality().equals(
-                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
+            const DeepCollectionEquality().equals(other.status, status));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
 
   @JsonKey(ignore: true)
   @override
@@ -154,42 +147,36 @@ class _$_AuthState implements _AuthState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
-        $default, {
+    TResult Function(FormzStatus status) $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
   }) {
-    return $default(authFailureOrSuccessOption);
+    return $default(status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
   }) {
-    return $default?.call(authFailureOrSuccessOption);
+    return $default?.call(status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(authFailureOrSuccessOption);
+      return $default(status);
     }
     return orElse();
   }
@@ -233,11 +220,9 @@ class _$_AuthState implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState(
-      {required final Option<Either<AuthFailure, Unit>>
-          authFailureOrSuccessOption}) = _$_AuthState;
+  const factory _AuthState({required final FormzStatus status}) = _$_AuthState;
 
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  FormzStatus get status;
   @JsonKey(ignore: true)
   _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -282,9 +267,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
-        $default, {
+    TResult Function(FormzStatus status) $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -295,9 +278,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -308,9 +289,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -403,9 +382,7 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
-        $default, {
+    TResult Function(FormzStatus status) $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -416,9 +393,7 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -429,9 +404,7 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -549,9 +522,7 @@ class _$_ErrorMsg implements _ErrorMsg {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
-        $default, {
+    TResult Function(FormzStatus status) $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -562,9 +533,7 @@ class _$_ErrorMsg implements _ErrorMsg {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -575,9 +544,7 @@ class _$_ErrorMsg implements _ErrorMsg {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
-        $default, {
+    TResult Function(FormzStatus status)? $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,

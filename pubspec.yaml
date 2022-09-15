@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   another_flushbar: ^1.12.29
+  auto_route: ^5.0.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   firebase_auth: ^3.8.0
@@ -46,6 +47,7 @@ dependencies:
   uuid: ^3.0.6
 
 dev_dependencies:
+  auto_route_generator: ^5.0.2
   build_runner: ^2.2.0
   flutter_lints: ^2.0.0
   flutter_test:
