@@ -13,79 +13,106 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(listener: (context, state) {
-      state.when(
-          (status) => FlushbarHelper.createError(
-                message: 'Failure',
-              ),
-          loading: () => null,
-          success: () => null,
-          errorMsg: (e) => null);
-    }, child: BlocBuilder<SignInFormBloc, SignInFormState>(
-      builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            autovalidateMode: AutovalidateMode.always,
-            child: ListView(
-              children: [
-                const Text(
-                  '📝',
-                  style: TextStyle(fontSize: 50),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const _EmailForm(),
-                const SizedBox(
-                  height: 20,
-                ),
-                const _PassworForm(),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: MaterialButton(
-                        onPressed: () {
-                          context.read<AuthCubit>().signInWithEmailAndPassword(
-                              state.emailAddress, state.password);
-                        },
-                        child: const Text('Sign IN'),
-                      ),
-                    ),
-                    Expanded(
-                      child: MaterialButton(
-                        onPressed: () {
-                          context
-                              .read<AuthCubit>()
-                              .registerWithEmailAndPassword(
-                                  state.emailAddress, state.password);
-                        },
-                        child: const Text('Register'),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    context.read<AuthCubit>().signInWithGoogle();
-                  },
-                  child: const Text('Sign In With Google'),
-                )
-              ],
-            ),
-          ),
+    return BlocConsumer<SignInFormBloc, SignInFormState>(
+      listener: (context, state) {
+        state.authFailureOrSuccessOption.fold(
+          () {},
+          (either) {
+            either.fold(
+              (failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    // Use localized strings here in your apps
+                    cancelledByUser: (_) => 'Cancelled',
+                    serverError: (_) => 'Server error',
+                    emailAlreadyInUses: (_) => 'Email already in use',
+                    invalidEmailPasswordCombination: (_) =>
+                        'Invalid email and password combination',
+                  ),
+                ).show(context);
+              },
+              (_) {
+                //
+              },
+            );
+          },
         );
       },
-    ));
+      builder: (context, state) {
+        return BlocBuilder<SignInFormBloc, SignInFormState>(
+          builder: (context, state) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                autovalidateMode: AutovalidateMode.always,
+                child: ListView(
+                  children: [
+                    const Text(
+                      '📝',
+                      style: TextStyle(fontSize: 50),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const _EmailForm(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const _PassworForm(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: MaterialButton(
+                            onPressed: () {
+                              context.read<SignInFormBloc>().add(SignInFormEvent
+                                  .signInWithEmailAndPasswordPressed(
+                                      state.emailAddress, state.password));
+                            },
+                            child: const Text('Sign IN'),
+                          ),
+                        ),
+                        Expanded(
+                          child: MaterialButton(
+                            onPressed: () {
+                              context.read<SignInFormBloc>().add(SignInFormEvent
+                                  .registerWithEmailAndPasswordPressed(
+                                      state.emailAddress, state.password));
+                            },
+                            child: const Text('Register'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    MaterialButton(
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        context.read<SignInFormBloc>().add(
+                            const SignInFormEvent.signInWithGooglePressed());
+                      },
+                      child: const Text('Sign In With Google'),
+                    ),
+                    if (state.isSubmitting) ...[
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const LinearProgressIndicator()
+                    ]
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }
 
