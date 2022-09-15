@@ -9,8 +9,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidPassword({required T failedValue}) =
       ShortPassword<T>;
   const factory ValueFailure.empty({required T failedValue}) = Empty<T>;
-  const factory ValueFailure.multiline(
-      {required T failedValue, required int max}) = Multiline<T>;
-  const factory ValueFailure.listToLong({required T failedValue}) =
+  const factory ValueFailure.exceedingLength(
+      {required T failedValue, required int max}) = ExceedingLength<T>;
+  const factory ValueFailure.listToLong({required T failedValue,required int maxLength}) =
       ListTooLong<T>;
+  const factory ValueFailure.multiline(
+      {required T failedValue}) = Multiline<T>;
 }
