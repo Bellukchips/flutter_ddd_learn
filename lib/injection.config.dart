@@ -12,8 +12,8 @@ import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/authentication/authentication_bloc.dart' as _i11;
-import 'application/auth/login/auth_cubit.dart' as _i10;
 import 'application/auth/signIn_form/sign_in_form_bloc.dart' as _i9;
+import 'domain/auth/i_auth_facade.dart' as _i10;
 import 'domain/domain.dart' as _i5;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i6;
 import 'infrastructure/core/firebase_injectable_module.dart' as _i12;
@@ -33,8 +33,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i5.IAuthFacade>(() =>
       _i6.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i4.GoogleSignIn>()));
   gh.factory<_i7.MyApp>(() => _i7.MyApp(key: get<_i8.Key>()));
-  gh.factory<_i9.SignInFormBloc>(() => _i9.SignInFormBloc());
-  gh.factory<_i10.AuthCubit>(() => _i10.AuthCubit(get<_i5.IAuthFacade>()));
+  gh.factory<_i9.SignInFormBloc>(
+      () => _i9.SignInFormBloc(get<_i10.IAuthFacade>()));
   gh.factory<_i11.AuthenticationBloc>(
       () => _i11.AuthenticationBloc(get<_i5.IAuthFacade>()));
   return get;

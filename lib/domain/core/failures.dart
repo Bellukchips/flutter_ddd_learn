@@ -8,4 +8,9 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   }) = InvalidEmail<T>;
   const factory ValueFailure.invalidPassword({required T failedValue}) =
       ShortPassword<T>;
+  const factory ValueFailure.empty({required T failedValue}) = Empty<T>;
+  const factory ValueFailure.multiline(
+      {required T failedValue, required int max}) = Multiline<T>;
+  const factory ValueFailure.listToLong({required T failedValue}) =
+      ListTooLong<T>;
 }

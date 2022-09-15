@@ -17,9 +17,9 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => getIt<SignInFormBloc>(),
         ),
-        BlocProvider(
-          create: (context) => getIt<AuthCubit>(),
-        ),
+        // BlocProvider(
+        //   create: (context) => getIt<AuthCubit>(),
+        // ),
         BlocProvider(
           create: (context) => getIt<AuthenticationBloc>()
             ..add(const AuthenticationEvent.authCheckRequested()),
