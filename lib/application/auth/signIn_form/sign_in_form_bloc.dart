@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_ddd_learn/domain/auth/auth_failure.dart';
-import 'package:flutter_ddd_learn/domain/auth/i_auth_facade.dart';
 import 'package:flutter_ddd_learn/domain/auth/value_objects.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,14 +23,14 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         final email = EmailAddress(value.emailStr);
         return state.copyWith(
           emailAddress: email,
-          authFailureOrSuccessOption: none(),
         );
       },
       passwordChanged: (value) {
         final password = Password(value.passwordStr);
 
         return state.copyWith(
-            password: password, authFailureOrSuccessOption: none());
+          password: password,
+        );
       },
     ));
   }

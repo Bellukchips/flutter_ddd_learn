@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_ddd_learn/domain/auth/value_objects.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_ddd_learn/domain/domain.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:flutter_ddd_learn/domain/auth/i_auth_facade.dart';
 
 part 'auth_cubit.freezed.dart';
 part 'auth_state.dart';
@@ -13,12 +12,13 @@ class AuthCubit extends Cubit<AuthState> {
   final IAuthFacade _authFacade;
   AuthCubit(
     this._authFacade,
-  ) : super(const AuthState.initial());
+  ) : super(AuthState.initial());
 
   Future<void> signInWithGoogle() async {
     emit(const AuthState.loading());
     try {
-      await _authFacade.signInWithGoogle();
+      final failureOrSuccess = await _authFacade.signInWithGoogle();
+      emit(AuthState(authFailureOrSuccessOption: some(failureOrSuccess)));
       emit(const AuthState.success());
     } on Exception catch (e) {
       emit(AuthState.errorMsg(e.toString()));
@@ -31,8 +31,10 @@ class AuthCubit extends Cubit<AuthState> {
       EmailAddress emailAddress, Password password) async {
     emit(const AuthState.loading());
     try {
-      await _authFacade.registerWithEmailAndPassword(
+      final failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
           emailAddress: emailAddress, password: password);
+    
+      emit(AuthState(authFailureOrSuccessOption: some(failureOrSuccess)));
       emit(const AuthState.success());
     } on Exception catch (e) {
       emit(AuthState.errorMsg(e.toString()));
@@ -45,8 +47,9 @@ class AuthCubit extends Cubit<AuthState> {
       EmailAddress emailAddress, Password password) async {
     emit(const AuthState.loading());
     try {
-      await _authFacade.signInWithEmailAndPassword(
+      final failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
           emailAddress: emailAddress, password: password);
+      emit(AuthState(authFailureOrSuccessOption: some(failureOrSuccess)));
       emit(const AuthState.success());
     } on Exception catch (e) {
       emit(AuthState.errorMsg(e.toString()));

@@ -17,24 +17,30 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
+        $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -42,24 +48,24 @@ mixin _$AuthState {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+  TResult map<TResult extends Object?>(
+    TResult Function(_AuthState value) $default, {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_ErrorMsg value) errorMsg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -84,118 +90,157 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$_AuthStateCopyWith<$Res> {
+  factory _$$_AuthStateCopyWith(
+          _$_AuthState value, $Res Function(_$_AuthState) then) =
+      __$$_AuthStateCopyWithImpl<$Res>;
+  $Res call({Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, (v) => _then(v as _$_Initial));
+class __$$_AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements _$$_AuthStateCopyWith<$Res> {
+  __$$_AuthStateCopyWithImpl(
+      _$_AuthState _value, $Res Function(_$_AuthState) _then)
+      : super(_value, (v) => _then(v as _$_AuthState));
 
   @override
-  _$_Initial get _value => super._value as _$_Initial;
+  _$_AuthState get _value => super._value as _$_AuthState;
+
+  @override
+  $Res call({
+    Object? authFailureOrSuccessOption = freezed,
+  }) {
+    return _then(_$_AuthState(
+      authFailureOrSuccessOption: authFailureOrSuccessOption == freezed
+          ? _value.authFailureOrSuccessOption
+          : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<AuthFailure, Unit>>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_AuthState implements _AuthState {
+  const _$_AuthState({required this.authFailureOrSuccessOption});
+
+  @override
+  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AuthState.initial()';
+    return 'AuthState(authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthState &&
+            const DeepCollectionEquality().equals(
+                other.authFailureOrSuccessOption, authFailureOrSuccessOption));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(authFailureOrSuccessOption));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+      __$$_AuthStateCopyWithImpl<_$_AuthState>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
+        $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
   }) {
-    return initial();
+    return $default(authFailureOrSuccessOption);
   }
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
   }) {
-    return initial?.call();
+    return $default?.call(authFailureOrSuccessOption);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if ($default != null) {
+      return $default(authFailureOrSuccessOption);
     }
     return orElse();
   }
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+  TResult map<TResult extends Object?>(
+    TResult Function(_AuthState value) $default, {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_ErrorMsg value) errorMsg,
   }) {
-    return initial(this);
+    return $default(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
   }) {
-    return initial?.call(this);
+    return $default?.call(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if ($default != null) {
+      return $default(this);
     }
     return orElse();
   }
 }
 
-abstract class _Initial implements AuthState {
-  const factory _Initial() = _$_Initial;
+abstract class _AuthState implements AuthState {
+  const factory _AuthState(
+      {required final Option<Either<AuthFailure, Unit>>
+          authFailureOrSuccessOption}) = _$_AuthState;
+
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  @JsonKey(ignore: true)
+  _$$_AuthStateCopyWith<_$_AuthState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -236,8 +281,10 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
+        $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -247,8 +294,10 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -258,8 +307,10 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -273,8 +324,8 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+  TResult map<TResult extends Object?>(
+    TResult Function(_AuthState value) $default, {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_ErrorMsg value) errorMsg,
@@ -284,8 +335,8 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -295,8 +346,8 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -351,8 +402,10 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
+        $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -362,8 +415,10 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -373,8 +428,10 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -388,8 +445,8 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+  TResult map<TResult extends Object?>(
+    TResult Function(_AuthState value) $default, {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_ErrorMsg value) errorMsg,
@@ -399,8 +456,8 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -410,8 +467,8 @@ class _$_Success implements _Success {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -491,8 +548,10 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)
+        $default, {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String e) errorMsg,
@@ -502,8 +561,10 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -513,8 +574,10 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption)?
+        $default, {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String e)? errorMsg,
@@ -528,8 +591,8 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+  TResult map<TResult extends Object?>(
+    TResult Function(_AuthState value) $default, {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_ErrorMsg value) errorMsg,
@@ -539,8 +602,8 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,
@@ -550,8 +613,8 @@ class _$_ErrorMsg implements _ErrorMsg {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AuthState value)? $default, {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_ErrorMsg value)? errorMsg,

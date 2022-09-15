@@ -2,7 +2,6 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
-import 'package:formz/formz.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -14,79 +13,102 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignInFormBloc, SignInFormState>(
-      listener: (context, state) {
-        state.authFailureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold((l) {
-                  FlushbarHelper.createError(
-                      message: l.map(
-                    cancelledByUser: (_) => 'Cancelled',
-                    serverError: (_) => 'Server Error',
-                    emailAlreadyInUses: (_) => 'Email already in use',
-                    invalidEmailPasswordCombination: (_) =>
-                        'Invalid Email and Password Combination',
-                  )).show(context);
-                }, (_) {
-                  //! TO Navigate
-                }));
-      },
-      builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Form(
-            autovalidateMode: AutovalidateMode.always,
-            child: ListView(
-              children: [
-                const Text(
-                  '📝',
-                  style: TextStyle(fontSize: 50),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const _EmailForm(),
-                const SizedBox(
-                  height: 20,
-                ),
-                const _PassworForm(),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: MaterialButton(
-                        onPressed: () {},
-                        child: const Text('Sign IN'),
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      state.map(
+          (value) => value.authFailureOrSuccessOption.fold(() {}, (eihter) {
+                eihter.fold(
+                  (failure) {
+                    FlushbarHelper.createError(
+                      message: failure.map(
+                        // Use localized strings here in your apps
+                        cancelledByUser: (_) => 'Cancelled',
+                        serverError: (_) => 'Server error',
+                        emailAlreadyInUses: (_) => 'Email already in use',
+                        invalidEmailPasswordCombination: (_) =>
+                            'Invalid email and password combination',
                       ),
-                    ),
-                    Expanded(
-                      child: MaterialButton(
-                        onPressed: () {},
-                        child: const Text('Register'),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    context.read<AuthCubit>().signInWithGoogle();
+                    );
                   },
-                  child: const Text('Sign In With Google'),
-                )
-              ],
+                  (_) {},
+                );
+              }), loading: (e) {
+        FlushbarHelper.createLoading(
+            message: 'Loading',
+            linearProgressIndicator: const LinearProgressIndicator());
+      }, success: (e) {
+        FlushbarHelper.createSuccess(message: 'Success');
+      }, errorMsg: (e) {
+        FlushbarHelper.createError(message: 'Error');
+      });
+    }, builder: (context, state) {
+      return BlocBuilder<SignInFormBloc, SignInFormState>(
+        builder: (context, state) {
+          return Container(
+            padding: const EdgeInsets.all(20),
+            child: Form(
+              autovalidateMode: AutovalidateMode.always,
+              child: ListView(
+                children: [
+                  const Text(
+                    '📝',
+                    style: TextStyle(fontSize: 50),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const _EmailForm(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const _PassworForm(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MaterialButton(
+                          onPressed: () {
+                            context
+                                .read<AuthCubit>()
+                                .signInWithEmailAndPassword(
+                                    state.emailAddress, state.password);
+                          },
+                          child: const Text('Sign IN'),
+                        ),
+                      ),
+                      Expanded(
+                        child: MaterialButton(
+                          onPressed: () {
+                            context
+                                .read<AuthCubit>()
+                                .registerWithEmailAndPassword(
+                                    state.emailAddress, state.password);
+                          },
+                          child: const Text('Register'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  MaterialButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      context.read<AuthCubit>().signInWithGoogle();
+                    },
+                    child: const Text('Sign In With Google'),
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    });
   }
 }
 
