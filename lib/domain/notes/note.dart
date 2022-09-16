@@ -24,7 +24,7 @@ abstract class Note with _$Note {
       );
 
   Option<ValueFailure<dynamic>> get failureOption {
-    return body.failureOrUnit
+    return body.failureOrUnit 
         .andThen(todos.failureOrUnit)
         .andThen(todos
             .getOrCrash()
