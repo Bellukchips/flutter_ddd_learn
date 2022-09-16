@@ -15,22 +15,19 @@ part 'sign_in_form_bloc.freezed.dart';
 class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
   SignInFormBloc(this._authFacade) : super(SignInFormState.initial()) {
-    on<SignInFormEvent>(_mapEvent);
-  }
-
-  Future<void> _mapEvent(
-      SignInFormEvent event, Emitter<SignInFormState> emit) async {
-    event.map(emailChanged: (value) {
-      final email = EmailAddress(value.emailStr);
+    on<EmailChanged>((event, emit) {
+      final email = EmailAddress(event.emailStr);
       emit(state.copyWith(
         emailAddress: email,
       ));
-    }, passwordChanged: (value) {
-      final password = Password(value.passwordStr);
+    });
+    on<PasswordChanged>((event, emit) {
+      final password = Password(event.passwordStr);
       emit(state.copyWith(
         password: password,
       ));
-    }, registerWithEmailAndPasswordPressed: (value) async {
+    });
+    on<RegisterWithEmailAndPasswordPressed>((event, emit) async {
       Either<AuthFailure, Unit> failureOrSuccess =
           await _authFacade.registerWithEmailAndPassword(
               emailAddress: state.emailAddress, password: state.password);
@@ -48,8 +45,9 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       emit(state.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess)));
-    }, signInWithEmailAndPasswordPressed: (value) async {
+          authFailureOrSuccessOption: some(failureOrSuccess)));
+    });
+    on<SignInWithEmailAndPasswordPressed>((event, emit) async {
       Either<AuthFailure, Unit> failureOrSuccess =
           await _authFacade.signInWithEmailAndPassword(
               emailAddress: state.emailAddress, password: state.password);
@@ -67,19 +65,85 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       emit(state.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(failureOrSuccess)));
-    }, signInWithGooglePressed: (value) async {
+          authFailureOrSuccessOption: some(failureOrSuccess)));
+    });
+    on<SignInWithGooglePressed>((event, emit) async {
       try {
         emit(state.copyWith(
             isSubmitting: true, authFailureOrSuccessOption: none()));
         final failureOrSuccess = await _authFacade.signInWithGoogle();
         emit(state.copyWith(
             isSubmitting: false,
-            authFailureOrSuccessOption: some(failureOrSuccess)));
+            authFailureOrSuccessOption: optionOf(failureOrSuccess)));
       } catch (e) {
         emit(state.copyWith(
             showErrorMessages: true, authFailureOrSuccessOption: none()));
       }
     });
   }
+
+  // Future<void> _mapEvent(
+  //     SignInFormEvent event, Emitter<SignInFormState> emit) async {
+  //   event.map(emailChanged: (value) {
+  //     final email = EmailAddress(value.emailStr);
+  //     emit(state.copyWith(
+  //       emailAddress: email,
+  //     ));
+  //   }, passwordChanged: (value) {
+  //     final password = Password(value.passwordStr);
+  //     emit(state.copyWith(
+  //       password: password,
+  //     ));
+  //   }, registerWithEmailAndPasswordPressed: (value) async* {
+  //     Either<AuthFailure, Unit> failureOrSuccess =
+  //         await _authFacade.registerWithEmailAndPassword(
+  //             emailAddress: state.emailAddress, password: state.password);
+
+  //     final isEmailValid = state.emailAddress.isValid();
+  //     final isPasswordValid = state.password.isValid();
+
+  //     if (isEmailValid && isPasswordValid) {
+  //       emit(state.copyWith(
+  //           isSubmitting: true, authFailureOrSuccessOption: none()));
+
+  //       failureOrSuccess = await _authFacade.registerWithEmailAndPassword(
+  //           emailAddress: state.emailAddress, password: state.password);
+  //     }
+  //     emit(state.copyWith(
+  //         isSubmitting: false,
+  //         showErrorMessages: true,
+  //         authFailureOrSuccessOption: optionOf(failureOrSuccess)));
+  //   }, signInWithEmailAndPasswordPressed: (value) async* {
+  //     Either<AuthFailure, Unit> failureOrSuccess =
+  //         await _authFacade.signInWithEmailAndPassword(
+  //             emailAddress: state.emailAddress, password: state.password);
+
+  //     final isEmailValid = state.emailAddress.isValid();
+  //     final isPasswordValid = state.password.isValid();
+
+  //     if (isEmailValid && isPasswordValid) {
+  //       emit(state.copyWith(
+  //           isSubmitting: true, authFailureOrSuccessOption: none()));
+
+  //       failureOrSuccess = await _authFacade.signInWithEmailAndPassword(
+  //           emailAddress: state.emailAddress, password: state.password);
+  //     }
+  //     emit(state.copyWith(
+  //         isSubmitting: false,
+  //         showErrorMessages: true,
+  //         authFailureOrSuccessOption: optionOf(failureOrSuccess)));
+  //   }, signInWithGooglePressed: (value) async* {
+  //     try {
+  //       emit(state.copyWith(
+  //           isSubmitting: true, authFailureOrSuccessOption: none()));
+  //       final failureOrSuccess = await _authFacade.signInWithGoogle();
+  //       emit(state.copyWith(
+  //           isSubmitting: false,
+  //           authFailureOrSuccessOption: optionOf(failureOrSuccess)));
+  //     } catch (e) {
+  //       emit(state.copyWith(
+  //           showErrorMessages: true, authFailureOrSuccessOption: none()));
+  //     }
+  //   });
+// }
 }
