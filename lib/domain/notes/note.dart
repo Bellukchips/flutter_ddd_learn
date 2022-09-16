@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_ddd_learn/domain/domain.dart';
-import 'package:flutter_ddd_learn/domain/notes/todo_item.dart';
-import 'package:flutter_ddd_learn/domain/notes/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/collection.dart';
 part 'note.freezed.dart';

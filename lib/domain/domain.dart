@@ -5,3 +5,8 @@ export 'core/errors.dart';
 export 'core/failures.dart';
 export 'core/value_objects.dart';
 export 'core/value_validator.dart';
+export 'notes/note.dart';
+export 'notes/todo_item.dart';
+export 'notes/value_objects.dart';
+export 'notes/i_note_repository.dart';
+export 'notes/note_failures.dart';
