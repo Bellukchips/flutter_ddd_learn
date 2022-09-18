@@ -11,12 +11,14 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/authentication/authentication_bloc.dart' as _i11;
-import 'application/auth/signIn_form/sign_in_form_bloc.dart' as _i9;
-import 'domain/auth/i_auth_facade.dart' as _i10;
+import 'application/auth/authentication/authentication_bloc.dart' as _i13;
+import 'application/auth/signIn_form/sign_in_form_bloc.dart' as _i11;
+import 'application/notes/note_actor/note_actor_bloc.dart' as _i9;
+import 'application/notes/note_watcher/note_watcher_bloc.dart' as _i10;
+import 'domain/auth/i_auth_facade.dart' as _i12;
 import 'domain/domain.dart' as _i5;
 import 'infrastructure/auth/firebase_auth_facade.dart' as _i6;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i12;
+import 'infrastructure/core/firebase_injectable_module.dart' as _i14;
 import 'presentation/core/app.dart'
     as _i7; // ignore_for_file: unnecessary_lambdas
 
@@ -33,11 +35,15 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i5.IAuthFacade>(() =>
       _i6.FirebaseAuthFacade(get<_i3.FirebaseAuth>(), get<_i4.GoogleSignIn>()));
   gh.factory<_i7.MyApp>(() => _i7.MyApp(key: get<_i8.Key>()));
-  gh.factory<_i9.SignInFormBloc>(
-      () => _i9.SignInFormBloc(get<_i10.IAuthFacade>()));
-  gh.factory<_i11.AuthenticationBloc>(
-      () => _i11.AuthenticationBloc(get<_i5.IAuthFacade>()));
+  gh.factory<_i9.NoteActorBloc>(
+      () => _i9.NoteActorBloc(get<_i5.INoteRepository>()));
+  gh.factory<_i10.NoteWatcherBloc>(
+      () => _i10.NoteWatcherBloc(get<_i5.INoteRepository>()));
+  gh.factory<_i11.SignInFormBloc>(
+      () => _i11.SignInFormBloc(get<_i12.IAuthFacade>()));
+  gh.factory<_i13.AuthenticationBloc>(
+      () => _i13.AuthenticationBloc(get<_i5.IAuthFacade>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i12.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i14.FirebaseInjectableModule {}
