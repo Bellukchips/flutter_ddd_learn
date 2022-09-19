@@ -8,8 +8,11 @@ import 'package:injectable/injectable.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //config injection
   configureInjection(Environment.dev);
+  // init firebase app
   await Firebase.initializeApp();
+  // init bloc observer
   Bloc.observer = MyBlocObserver();
   runApp(
     MultiBlocProvider(
@@ -23,6 +26,12 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => getIt<AuthenticationBloc>()
             ..add(const AuthenticationEvent.authCheckRequested()),
+        ),
+        BlocProvider(
+          create: (context) => getIt<NoteWatcherBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<NoteActorBloc>(),
         ),
       ],
       child: MyApp(),

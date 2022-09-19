@@ -47,6 +47,7 @@ dependencies:
   json_annotation: ^4.6.0
   kt_dart: ^0.10.0
   logger: ^1.1.0
+  rxdart: ^0.27.5
   uuid: ^3.0.6
 
 dev_dependencies:
