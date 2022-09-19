@@ -10,3 +10,4 @@ export 'notes/todo_item.dart';
 export 'notes/value_objects.dart';
 export 'notes/i_note_repository.dart';
 export 'notes/note_failures.dart';
+export 'notes/todo_item.dart';
