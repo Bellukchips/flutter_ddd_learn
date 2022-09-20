@@ -2,6 +2,8 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -33,6 +35,10 @@ class _SignInFormState extends State<SignInForm> {
               },
               (_) {
                 //
+                AutoRouter.of(context).push(const NoteOverviewRoute());
+                context
+                    .read<AuthenticationBloc>()
+                    .add(const AuthenticationEvent.authCheckRequested());
               },
             );
           },
