@@ -24,13 +24,18 @@ class _$AppRouter extends RootStackRouter {
     SignInRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const SignInPage());
+    },
+    NoteOverviewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const NoteOverviewPage());
     }
   };
 
   @override
   List<RouteConfig> get routes => [
         RouteConfig(SplashRoute.name, path: '/'),
-        RouteConfig(SignInRoute.name, path: '/sign-in-page')
+        RouteConfig(SignInRoute.name, path: '/sign-in-page'),
+        RouteConfig(NoteOverviewRoute.name, path: '/note-overview-page')
       ];
 }
 
@@ -48,4 +53,13 @@ class SignInRoute extends PageRouteInfo<void> {
   const SignInRoute() : super(SignInRoute.name, path: '/sign-in-page');
 
   static const String name = 'SignInRoute';
+}
+
+/// generated route for
+/// [NoteOverviewPage]
+class NoteOverviewRoute extends PageRouteInfo<void> {
+  const NoteOverviewRoute()
+      : super(NoteOverviewRoute.name, path: '/note-overview-page');
+
+  static const String name = 'NoteOverviewRoute';
 }

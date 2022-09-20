@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         state.when(
             initial: () => null,
             authenticated: () {
-              print('success login');
+              _appRoute.replace(const NoteOverviewRoute());
             },
             unauthenticated: () => _appRoute.replace(const SplashRoute()));
       },

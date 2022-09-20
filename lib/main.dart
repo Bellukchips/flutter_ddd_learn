@@ -28,10 +28,13 @@ Future<void> main() async {
             ..add(const AuthenticationEvent.authCheckRequested()),
         ),
         BlocProvider(
-          create: (context) => getIt<NoteWatcherBloc>(),
+          create: (context) => getIt<NoteWatcherBloc>()..add(const NoteWatcherEvent.watchAllStarted()),
         ),
         BlocProvider(
           create: (context) => getIt<NoteActorBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<NoteFormBloc>(),
         ),
       ],
       child: MyApp(),
