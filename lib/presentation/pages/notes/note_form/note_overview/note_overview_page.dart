@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/note_overview/widgets/body_overview_widget.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 
 class NoteOverviewPage extends StatelessWidget {
@@ -57,6 +58,7 @@ class NoteOverviewPage extends StatelessWidget {
             )
           ],
         ),
+        body: const BodyOverviewWidget(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.add),
