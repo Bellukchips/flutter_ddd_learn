@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
 import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/note_overview/widgets/body_overview_widget.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/note_overview/widgets/uncomplete_switch.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class NoteOverviewPage extends StatelessWidget {
+class NoteOverviewPage extends HookWidget implements AutoRouteWrapper {
   const NoteOverviewPage({super.key});
 
   @override
@@ -52,10 +54,7 @@ class NoteOverviewPage extends StatelessWidget {
             icon: const Icon(Icons.logout_rounded),
           ),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.indeterminate_check_box),
-            )
+            UncompletedSwitch(),
           ],
         ),
         body: const BodyOverviewWidget(),
@@ -65,5 +64,10 @@ class NoteOverviewPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return this;
   }
 }
