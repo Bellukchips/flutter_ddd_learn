@@ -35,7 +35,7 @@ class _SignInFormState extends State<SignInForm> {
               },
               (_) {
                 //
-                AutoRouter.of(context).push(const NoteOverviewRoute());
+                AutoRouter.of(context).replace(const NoteOverviewRoute());
                 context
                     .read<AuthenticationBloc>()
                     .add(const AuthenticationEvent.authCheckRequested());

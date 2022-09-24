@@ -32,10 +32,10 @@ dependencies:
   another_flushbar: ^1.12.29
   auto_route: ^5.0.1
   cloud_firestore: ^3.4.8
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   dartz: ^0.10.1
-  firebase_auth: ^3.8.0
-  firebase_core: ^1.22.0
+  firebase_auth: ^3.10.0
+  firebase_core: ^1.23.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
