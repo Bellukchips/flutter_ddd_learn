@@ -18,7 +18,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
       emit(event.initNoteOption.fold(
           () => state,
           (initialNote) =>
-              state.copyWith(note: initialNote, isEditing: false)));
+              state.copyWith(note: initialNote, isEditing: true)));
     });
     on<_BodyChanged>((event, emit) async {
       emit(state.copyWith(
@@ -38,9 +38,7 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
           saveFailureOrSuccessOption: none()));
     });
     on<_Saved>((event, emit) async {
-      Either<NotesFailure, Unit> failureOrSuccess = state.isEditing
-          ? await _noteRepository.update(state.note)
-          : await _noteRepository.create(state.note);
+      late Either<NotesFailure, Unit> failureOrSuccess;
       emit(state.copyWith(
         isSaving: true,
         saveFailureOrSuccessOption: none(),

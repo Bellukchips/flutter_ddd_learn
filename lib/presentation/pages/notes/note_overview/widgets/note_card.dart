@@ -16,30 +16,35 @@ class NoteCard extends StatelessWidget {
       color: note.color.getOrCrash(),
       child: InkWell(
         onTap: () {
-          AutoRouter.of(context).replace(NoteFormRoute(editedNote: note));
+          AutoRouter.of(context).push(NoteFormRoute(editedNote: note));
         },
         onLongPress: () {
           final noteActorBloc = context.read<NoteActorBloc>();
           _showDeleteDialog(context, noteActorBloc);
         },
-        child: Column(
-          children: [
-            Text(
-              note.body.getOrCrash(),
-              style: const TextStyle(fontSize: 18),
-            ),
-            if (note.todos.length > 0) ...[
-              const SizedBox(
-                height: 4,
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                note.body.getOrCrash(),
+                style: const TextStyle(fontSize: 14),
+                textAlign: TextAlign.start,
               ),
-              Wrap(
-                spacing: 8,
-                children: [
-                  ...note.todos.getOrCrash().map((todo) => Container()).iter
-                ],
-              )
-            ]
-          ],
+              if (note.todos.length > 0) ...[
+                const SizedBox(
+                  height: 4,
+                ),
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    ...note.todos.getOrCrash().map((todo) => Container()).iter
+                  ],
+                )
+              ]
+            ],
+          ),
         ),
       ),
     );

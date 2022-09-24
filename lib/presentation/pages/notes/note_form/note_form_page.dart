@@ -8,6 +8,8 @@ import 'package:flutter_ddd_learn/domain/domain.dart';
 import 'package:flutter_ddd_learn/injection.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 
+import 'widgets/body_field.dart';
+
 class NoteFormPage extends StatelessWidget {
   final Note? editedNote;
   const NoteFormPage({super.key, required this.editedNote});
@@ -36,8 +38,7 @@ class NoteFormPage extends StatelessWidget {
                         unableToDelete: (_) =>
                             'Unable to delete')).show(context);
               }, (_) {
-                AutoRouter.of(context).popUntil(
-                    (route) => route.settings.name == NoteOverviewRoute.name);
+                AutoRouter.of(context).replace(const NoteOverviewRoute());
               })
             },
           );
@@ -46,7 +47,7 @@ class NoteFormPage extends StatelessWidget {
         builder: (context, state) {
           return Stack(
             children: [
-              const NoteFormScaffold(),
+              const NoteFormPageScaffold(),
               SavingOverlay(
                 isSaving: state.isSaving,
               ),
@@ -98,8 +99,8 @@ class SavingOverlay extends StatelessWidget {
   }
 }
 
-class NoteFormScaffold extends StatelessWidget {
-  const NoteFormScaffold({
+class NoteFormPageScaffold extends StatelessWidget {
+  const NoteFormPageScaffold({
     Key? key,
   }) : super(key: key);
 
@@ -108,19 +109,33 @@ class NoteFormScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<NoteFormBloc, NoteFormState>(
-          buildWhen: (previous, current) =>
-              previous.isEditing != current.isEditing,
+          buildWhen: (p, c) => p.isEditing != c.isEditing,
           builder: (context, state) {
-            return Text(state.isEditing ? 'Edit a Note' : 'Create a Note');
+            return Text(state.isEditing ? 'Edit a note' : 'Create a note');
           },
         ),
-        actions: [
+        actions: <Widget>[
           IconButton(
-              onPressed: () {
-                context.read<NoteFormBloc>().add(const NoteFormEvent.saved());
-              },
-              icon: const Icon(Icons.check)),
+            icon: Icon(Icons.check),
+            onPressed: () {
+              context.read<NoteFormBloc>().add(const NoteFormEvent.saved());
+            },
+          )
         ],
+      ),
+      body: BlocBuilder<NoteFormBloc, NoteFormState>(
+        builder: (context, state) {
+          return Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const BodyField(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
