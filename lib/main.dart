@@ -33,9 +33,6 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => getIt<NoteActorBloc>(),
         ),
-        BlocProvider(
-          create: (context) => getIt<NoteFormBloc>(),
-        ),
       ],
       child: MyApp(),
     ),
