@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const duration = Duration(seconds: 2);
     Timer(duration, () {
-      AutoRouter.of(context).push(const SignInRoute());
+      AutoRouter.of(context).replace(const SignInRoute());
     });
     return const Scaffold(
       body: Center(
