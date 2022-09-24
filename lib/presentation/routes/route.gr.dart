@@ -27,7 +27,15 @@ class _$AppRouter extends RootStackRouter {
     },
     NoteOverviewRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const NoteOverviewPage());
+          routeData: routeData,
+          child: WrappedRoute(child: const NoteOverviewPage()));
+    },
+    NoteFormRoute.name: (routeData) {
+      final args = routeData.argsAs<NoteFormRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: NoteFormPage(key: args.key, editedNote: args.editedNote),
+          fullscreenDialog: true);
     }
   };
 
@@ -35,7 +43,8 @@ class _$AppRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(SplashRoute.name, path: '/'),
         RouteConfig(SignInRoute.name, path: '/sign-in-page'),
-        RouteConfig(NoteOverviewRoute.name, path: '/note-overview-page')
+        RouteConfig(NoteOverviewRoute.name, path: '/note-overview-page'),
+        RouteConfig(NoteFormRoute.name, path: '/note-form-page')
       ];
 }
 
@@ -62,4 +71,28 @@ class NoteOverviewRoute extends PageRouteInfo<void> {
       : super(NoteOverviewRoute.name, path: '/note-overview-page');
 
   static const String name = 'NoteOverviewRoute';
+}
+
+/// generated route for
+/// [NoteFormPage]
+class NoteFormRoute extends PageRouteInfo<NoteFormRouteArgs> {
+  NoteFormRoute({Key? key, required Note? editedNote})
+      : super(NoteFormRoute.name,
+            path: '/note-form-page',
+            args: NoteFormRouteArgs(key: key, editedNote: editedNote));
+
+  static const String name = 'NoteFormRoute';
+}
+
+class NoteFormRouteArgs {
+  const NoteFormRouteArgs({this.key, required this.editedNote});
+
+  final Key? key;
+
+  final Note? editedNote;
+
+  @override
+  String toString() {
+    return 'NoteFormRouteArgs{key: $key, editedNote: $editedNote}';
+  }
 }

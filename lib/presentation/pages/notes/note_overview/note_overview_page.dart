@@ -3,8 +3,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
-import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/note_overview/widgets/body_overview_widget.dart';
-import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/note_overview/widgets/uncomplete_switch.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_overview/widgets/body_overview_widget.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_overview/widgets/uncomplete_switch.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -59,7 +59,9 @@ class NoteOverviewPage extends HookWidget implements AutoRouteWrapper {
         ),
         body: const BodyOverviewWidget(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            AutoRouter.of(context).replace(NoteFormRoute(editedNote: null));
+          },
           child: const Icon(Icons.add),
         ),
       ),
