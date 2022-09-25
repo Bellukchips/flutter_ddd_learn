@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/misc/todo_item_presentation_classes.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../application/application.dart';
 import '../misc/build_context_x.dart';

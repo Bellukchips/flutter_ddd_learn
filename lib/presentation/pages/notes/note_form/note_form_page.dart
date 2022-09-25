@@ -9,6 +9,7 @@ import 'package:flutter_ddd_learn/injection.dart';
 import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/misc/todo_item_presentation_classes.dart';
 import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/widgets/add_todo_tile.dart';
 import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/widgets/color_field.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/widgets/todo_list.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 import 'package:provider/provider.dart';
 
@@ -138,9 +139,10 @@ class NoteFormPageScaffold extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: const [
-                     BodyField(),
-                     ColorField(),
-                     AddTodoTIle()
+                    BodyField(),
+                    ColorField(),
+                    TodoList(),
+                    AddTodoTIle()
                   ],
                 ),
               ),
