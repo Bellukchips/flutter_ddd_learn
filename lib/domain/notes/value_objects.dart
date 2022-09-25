@@ -28,7 +28,7 @@ class TodoName extends ValueObject<String> {
 
   factory TodoName(String input) {
     assert(input != null);
-    
+
     return TodoName._(
       validateMaxStringLength(input, maxLength)
           .flatMap(validateStringNotEmpty)
@@ -49,14 +49,15 @@ class NoteColor extends ValueObject<Color> {
     Color(0xff997950), // tortilla
     Color(0xfffffdd0), // cream
   ];
+
   @override
   final Either<ValueFailure<Color>, Color> value;
 
-  static const maxLength = 1000;
-
   factory NoteColor(Color input) {
     assert(input != null);
-    return NoteColor._(right(makeColorOpaque(input)));
+    return NoteColor._(
+      right(makeColorOpaque(input)),
+    );
   }
 
   const NoteColor._(this.value);

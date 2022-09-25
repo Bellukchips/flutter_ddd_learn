@@ -6,6 +6,7 @@ import 'package:flutter_ddd_learn/infrastructure/notes/notes_dtos.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:flutter_ddd_learn/infrastructure/core/firestore_helper.dart';
+import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: INoteRepository)
@@ -60,6 +61,8 @@ class NoteRepository implements INoteRepository {
       } else if (e.message!.contains('NOT_FOUND')) {
         return left(const NotesFailure.unableToUpdate());
       } else {
+        var logger = Logger();
+        logger.d(e.message);
         return left(const NotesFailure.unexpected());
       }
     }
