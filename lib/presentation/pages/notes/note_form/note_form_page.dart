@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ddd_learn/application/application.dart';
 import 'package:flutter_ddd_learn/domain/domain.dart';
 import 'package:flutter_ddd_learn/injection.dart';
+import 'package:flutter_ddd_learn/presentation/pages/notes/note_form/widgets/color_field.dart';
 import 'package:flutter_ddd_learn/presentation/routes/route.dart';
 
 import 'widgets/body_field.dart';
@@ -116,7 +117,7 @@ class NoteFormPageScaffold extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.check),
+            icon: const Icon(Icons.check),
             onPressed: () {
               context.read<NoteFormBloc>().add(const NoteFormEvent.saved());
             },
@@ -129,8 +130,9 @@ class NoteFormPageScaffold extends StatelessWidget {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: SingleChildScrollView(
               child: Column(
-                children: [
-                  const BodyField(),
+                children: const [
+                   BodyField(),
+                   ColorField()
                 ],
               ),
             ),
