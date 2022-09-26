@@ -131,9 +131,7 @@ class NoteFormPageScaffold extends StatelessWidget {
       body: BlocBuilder<NoteFormBloc, NoteFormState>(
         builder: (context, state) {
           return ChangeNotifierProvider(
-            create: (context) {
-              return FormTodos();
-            },
+            create: (_) => FormTodos(),
             child: Form(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: SingleChildScrollView(
@@ -142,7 +140,10 @@ class NoteFormPageScaffold extends StatelessWidget {
                     BodyField(),
                     ColorField(),
                     TodoList(),
-                    AddTodoTIle()
+                    AddTodoTile(),
+                    SizedBox(
+                      height: 100,
+                    )
                   ],
                 ),
               ),

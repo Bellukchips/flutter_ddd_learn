@@ -6,8 +6,8 @@ import 'package:kt_dart/collection.dart';
 import '../../../../../application/application.dart';
 import '../misc/build_context_x.dart';
 
-class AddTodoTIle extends StatelessWidget {
-  const AddTodoTIle({super.key});
+class AddTodoTile extends StatelessWidget {
+  const AddTodoTile({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class AddTodoTIle extends StatelessWidget {
             child: Icon(Icons.add),
           ),
           onTap: () {
-            context.formTodos.plusElement(TodoItemPrimitive.empty());
+           context.formTodos =  context.formTodos.plusElement(TodoItemPrimitive.empty());
             context
                 .read<NoteFormBloc>()
                 .add(NoteFormEvent.todosChanged(context.formTodos));

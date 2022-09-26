@@ -39,7 +39,7 @@ class NoteCard extends StatelessWidget {
                 Wrap(
                   spacing: 8,
                   children: [
-                    ...note.todos.getOrCrash().map((todo) => Container()).iter
+                    ...note.todos.getOrCrash().map((todo) => TodoDisplay(todo: todo,)).iter
                   ],
                 )
               ]
