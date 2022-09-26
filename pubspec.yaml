@@ -52,6 +52,7 @@ dependencies:
   provider: ^6.0.3
   rxdart: ^0.27.5
   uuid: ^3.0.6
+  implicitly_animated_reorderable_list_2: ^0.4.4
 
 dev_dependencies:
   auto_route_generator: ^5.0.2
